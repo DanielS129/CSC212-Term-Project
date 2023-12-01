@@ -1,5 +1,6 @@
 # CSC212-Term-Project
 Here is our Group Consisting of:
+<<<<<<< HEAD
 - Daniel Sevilla
 - Mithilesh Pabba
 - Joseph Fernandez
@@ -14,3 +15,9 @@ A B-Tree (also known as Balanced Tree) is a self-balancing tree designed to over
 - Operating Systems: B-Trees manage memory efficiently.
 - CAD Systems: B-Trees organize and search geometric data.
 - Natural Language Processing, Computer Networks, and Cryptography also utilize B-Trees.
+=======
+⋅⋅*Daniel Sevilla 
+⋅⋅*Mithilesh Pabba
+⋅⋅*Joseph Fernandez
+⋅⋅*Danny Tran
+>>>>>>> 03644f4 (Adding the Files to work with Group Members)
