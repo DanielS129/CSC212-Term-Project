@@ -1,6 +1,5 @@
 # CSC212-Term-Project
 Here is our Group Consisting of:
-<<<<<<< HEAD
 - Daniel Sevilla
 - Mithilesh Pabba
 - Joseph Fernandez
