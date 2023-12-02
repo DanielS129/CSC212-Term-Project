@@ -1,10 +1,12 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <string>
 
 void print_tree(BTree* tree, int mode);
 
 // Providing a general layout of main.cpp
+
 // <file_name> <traversal_method>
 int main(int argc, char*argv[]){
     std::ifstream ifs(argv[1]);
@@ -14,14 +16,14 @@ int main(int argc, char*argv[]){
 
     std::string line;
 
-    // Get the numbers to be inserted
+    // Get the data to be inserted
     std::getline(ifs, line);
     std::stringstream ss(line);
 
-    int num;
-    // Insert the numbers
-    while(ss >> num){
-        tree.insert(num);
+    std::string data;
+    // Insert data
+    while(ss >> data){
+        tree.insert(data);
         print_tree(&tree, mode);
     }
 
@@ -31,8 +33,8 @@ int main(int argc, char*argv[]){
     ss.str(line);
 
     // Remove the numbers
-    while(ss >> num){
-        tree.remove(num);
+    while(ss >> data){
+        tree.remove(data);
         print_tree(&tree, mode);
     }
 }
