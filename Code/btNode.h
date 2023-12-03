@@ -17,13 +17,11 @@
 
 class BTNode{
     private:
-        int DEGREE; //Will Represent t, The range for # of Keys
-        
+        int DEGREE; // Will Represent t, The range for # of Keys
         int num; // Represents the Current # of Keys
-        std :: string *keys; //Will represent the list of the "Data"
-        
-        BTNode **children; // Will represent a list of Node Pointers. 
+        std::string *keys; // Will represent the list of the "Data"
+        BTNode **children; // Will represent a list of Node Pointers.
+        bool isLeaf; // Is true when node is leaf. Otherwise false
 
-        bool isLeaf;      // Is true when node is leaf. Otherwise false
     public:
 };
