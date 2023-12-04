@@ -27,10 +27,10 @@ public:
 };
 private:
     BTNode* root;
-    void insertRec(BTNode* node, const std::string& key);
-    void removeRec(BTNode* node, const std::string& key);
-    bool searchRec(BTNode* node, const std::string& key);
-    void printRec(BTNode* node);
+    void insertR(BTNode* node, const std::string& key);
+    void removeR(BTNode* node, const std::string& key);
+    bool searchR(BTNode* node, const std::string& key);
+    void printR(BTNode* node);
 };
 
 #endif
