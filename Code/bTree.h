@@ -5,6 +5,7 @@
 #include <vector>
 #include <fstream>
 #include "bt.Node.h"
+
 /*
     B-Tree Class
 */
@@ -19,7 +20,6 @@ class BTree {
 public:
     BTree();
     ~BTree();
-
     void insert(const std::string& key);
     void remove(const std::string& key);
     bool search(const std::string& key);
