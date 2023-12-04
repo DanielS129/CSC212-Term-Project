@@ -25,6 +25,7 @@ public:
 
     void insert(const std::string& key);
     void remove(const std::string& key);
+    bool search(const std::string& key);
     void print(int mode);
 };
 
