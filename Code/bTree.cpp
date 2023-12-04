@@ -4,9 +4,6 @@ BTree::BTree() {
   root = nullptr;
 }
 
-BTree::BTree() {
-}
-
 void BTree::insert(const std::string& key) {
   if (!root) {
     root = new BTNode(true);
