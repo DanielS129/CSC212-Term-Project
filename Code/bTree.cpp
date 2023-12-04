@@ -5,7 +5,7 @@ BTree::BTree() {
 }
 
 BTree::~BTree() {
-    delete root;
+  delete root;
 }
 
 void BTree::insert(const std::string& key) {
@@ -15,12 +15,13 @@ void BTree::insert(const std::string& key) {
   insertR(root,key);
 }
 
-
 void BTree::insertR(BTNode* node, const std::string& key) {
+  int i = 0;
   if (node->isLeaf) {
     // If node is a leaf, insert key into this node
     node->keys.push_back(key);
-  } else {
+  }
+  else {
     // Find child node to insert to   
     while (i < node->keys.size() && key > node->keys[i]) {
       i++;
@@ -28,10 +29,10 @@ void BTree::insertR(BTNode* node, const std::string& key) {
     insertR(node->children[i], key);
     // Handle the case when the child node is full
     if (node->children[i]->keys.size() > MAX_KEYS) {
+      
     }
   }
 }
-
 void BTree::remove(const std::string& key) {
   if (!root) {
     return;
@@ -40,6 +41,7 @@ void BTree::remove(const std::string& key) {
 }
 
 void BTree::removeR(BTNode* node, const std::string& key) {
+  int i = 0;
   if (node->isLeaf) {
     // If node is a leaf, remove the key from this node
     for (int i = 0; i < node->keys.size(); ++i) {
@@ -48,15 +50,17 @@ void BTree::removeR(BTNode* node, const std::string& key) {
         return;
       }
     }
-  } else {
+  }
+  else {
     // Find the child node where the key might be
     int i = 0;
     while (i < node->keys.size() && key > node->keys[i]) {
       i++;
     }
-    removeRec(node->children[i], key);
+    removeR(node->children[i], key);
     // Handle the case when the child node has too few keys
     if (node->children[i]->keys.size() < MIN_KEYS) {
+      
     }
   }
 }
@@ -76,9 +80,11 @@ bool BTree::searchR(BTNode* node, const std::string& key) {
   }
   if (i < node->keys.size() && key == node->keys[i]) {
     return true; // True if found, false otherwise
-  } else if (node->isLeaf) {
+  }
+  else if (node->isLeaf) {
     return false;
-  } else {
+  }
+  else {
     return searchR(node->children[i], key); // Recursively search 
   }
 }
