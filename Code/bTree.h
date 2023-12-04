@@ -15,10 +15,17 @@
 
 */
 
-class BTree{
-    private:
+class BTree {
+private:
+    BTNode* root;
 
-    public:
+public:
+    BTree();
+    ~BTree();
+
+    void insert(const std::string& key);
+    void remove(const std::string& key);
+    void print(int mode);
 };
 
 #endif
