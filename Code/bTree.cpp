@@ -21,6 +21,11 @@ void BTree::remove(const std::string& key) {
   // removal logic
 }
 
+bool BTree::search(const std::string& key) {
+    // Implement the search logic 
+}
+
+
 void BTree::print(int mode) {
   if (!root) {
     return;
