@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include "bTree.h"
 
 void print_tree(BTree* tree, int mode);
 
