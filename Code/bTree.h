@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-
+#include "bt.Node.h"
 /*
     B-Tree Class
 */
@@ -16,9 +16,6 @@
 */
 
 class BTree {
-private:
-    BTNode* root;
-
 public:
     BTree();
     ~BTree();
@@ -26,7 +23,14 @@ public:
     void insert(const std::string& key);
     void remove(const std::string& key);
     bool search(const std::string& key);
-    void print(int mode);
+    void print();
+};
+private:
+    BTNode* root;
+    void insertRec(BTNode* node, const std::string& key);
+    void removeRec(BTNode* node, const std::string& key);
+    bool searchRec(BTNode* node, const std::string& key);
+    void printRec(BTNode* node);
 };
 
 #endif
