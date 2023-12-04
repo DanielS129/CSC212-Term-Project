@@ -8,10 +8,6 @@
 
 /*
     B-Tree Class
-*/
-
-/*
-    B-Tree Class
     ------------
     Rules:
     - Each node contains keys in a sorted order.
