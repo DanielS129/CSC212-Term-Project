@@ -11,12 +11,20 @@ void BTree::insert(const std::string& key) {
   insertR(root,key);
 }
 
+
 void BTree::insertR(BTNode* node, const std::string& key) {
   if (node->isLeaf) {
-    // if node is a leaf, insert key into this node
+    // If node is a leaf, insert key into this node
+    node->keys.push_back(key);
   } else {
-    // find child node to insert to
-    // recursive call
+    // Find child node to insert to   
+    while (i < node->keys.size() && key > node->keys[i]) {
+      i++;
+    }
+    insertR(node->children[i], key);
+    // Handle the case when the child node is full
+    if (node->children[i]->keys.size() > MAX_KEYS) {
+    }
   }
 }
 
@@ -27,12 +35,25 @@ void BTree::remove(const std::string& key) {
   removeR(root, key);
 }
 
-void BTree::removeRec(BTNode* node, const std::string& key) {
+void BTree::removeR(BTNode* node, const std::string& key) {
   if (node->isLeaf) {
-    // node is a leaf, remove the key from this node
+    // If node is a leaf, remove the key from this node
+    for (int i = 0; i < node->keys.size(); ++i) {
+      if (node->keys[i] == key) {
+        node->keys.erase(node->keys.begin() + i);
+        return;
+      }
+    }
   } else {
-    // find the child node where the key might be
-    // recursive call 
+    // Find the child node where the key might be
+    int i = 0;
+    while (i < node->keys.size() && key > node->keys[i]) {
+      i++;
+    }
+    removeRec(node->children[i], key);
+    // Handle the case when the child node has too few keys
+    if (node->children[i]->keys.size() < MIN_KEYS) {
+    }
   }
 }
 
@@ -44,9 +65,18 @@ bool BTree::search(const std::string& key) {
   return searchR(root, key);
 }
 
-bool BTree::searchRec(BTNode* node, const std::string& key) {
-  // Search logic
-  // true if found, false otherwise
+bool BTree::searchR(BTNode* node, const std::string& key) {
+  int i = 0;
+  while (i < node->keys.size() && key > node->keys[i]) {
+    i++;
+  }
+  if (i < node->keys.size() && key == node->keys[i]) {
+    return true; // True if found, false otherwise
+  } else if (node->isLeaf) {
+    return false;
+  } else {
+    return searchR(node->children[i], key); // Recursively search 
+  }
 }
 
 void BTree::print(int mode) {
@@ -58,7 +88,7 @@ void BTree::print(int mode) {
   std::cout << std::endl;
 }
 
-void BTree::printRec(BTNode* node) {
+void BTree::printR(BTNode* node) {
   if (node) {
     for (int i = 0; i < node->keys.size(); ++i) {
       if (!node->isLeaf) {
