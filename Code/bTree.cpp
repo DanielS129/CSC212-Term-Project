@@ -4,6 +4,10 @@ BTree::BTree() {
   root = nullptr;
 }
 
+BTree::~BTree() {
+    delete root;
+}
+
 void BTree::insert(const std::string& key) {
   if (!root) {
     root = new BTNode(true);
