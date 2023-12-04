@@ -63,7 +63,7 @@ void BTree::printR(BTNode* node) {
 
 BTree::BTree(int degree) {
   this->root = nullptr;
-  this->Degree = degree
+  this->Degree = degree;
 }
 
 BTree::~BTree() {
