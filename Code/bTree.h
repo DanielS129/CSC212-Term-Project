@@ -25,12 +25,13 @@
 class BTree {
     private:
         BTNode* root;
+        int Degree;
         void insertR(BTNode* node, const std::string& key);
         //void removeR(BTNode* node, const std::string& key);
         bool searchR(BTNode* node, const std::string& key);
         void printR(BTNode* node);  
     public:
-        BTree();
+        BTree(int degree);
         ~BTree();
         void insert(const std::string& key);
         //void remove(const std::string& key);
