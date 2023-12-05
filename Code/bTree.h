@@ -24,11 +24,9 @@ class BTree {
         int Degree;
 
         void splitNode(BTNode* parent, int index, BTNode* child);
-
         //void removeR(BTNode* node, const std::string& key);
         void insertR(BTNode* node, const std::string& key);
         int searchR(BTNode* node, const std::string& key, int& count);
-
         void traverseR(BTNode* node);
     public:
         BTree(int degree);
@@ -36,8 +34,7 @@ class BTree {
 
         //void remove(const std::string& key);
         void insert(const std::string& key);
-        int BTree::search(const std::string& key);
-        
+        int search(const std::string& key);
         void traverse();
 };
 
