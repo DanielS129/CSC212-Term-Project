@@ -1,12 +1,8 @@
 #include "bTree.h"
 
-/*
-  BTree Class Implementation
-*/
+// BTree Class Implementation
 
-/*
-  Private Functions
-*/
+// Private Functions
 
 void BTree::insertR(BTNode* node, const std::string& key) {
   int i = 0;
@@ -71,9 +67,7 @@ void BTree::printR(BTNode* node) {
   }
 }
 
-/*
-  Public Functions
-*/
+// Public Functions
 
 BTree::BTree(int degree) {
   this->root = nullptr;
@@ -110,7 +104,7 @@ void BTree::print(int mode) {
 /*
   Functions That will not be used in this Program
   
-  *Note: In a real world situation this code is needed and is part of this Class
+  Note: In a real world situation this code is needed and is part of this Class
   but for this case We won't use them. 
   For this Program ONLY
 */
