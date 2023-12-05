@@ -1,10 +1,8 @@
 #include "btNode.h"
 
-/*
-    BTNode Class Implementation 
-    
-    Public Functions
-*/
+// BTNode Class Implementation 
+
+// Public Functions
 
 BTNode :: BTNode(int degree, bool isleaf){
     this->DEGREE = degree;
@@ -25,7 +23,6 @@ BTNode :: BTNode(int degree, bool isleaf){
     for (int i = 0; i < 2 * DEGREE; ++i) {
         children[i] = nullptr;
     }
-
 }
 
 BTNode :: ~BTNode(){
