@@ -19,7 +19,8 @@ int main(int argc, char*argv[]){
     }
     data_file.close();
 
-    //Will Search through the Tree to see if tree is found
+    //Will Search through the Tree to see if name is found
+    //If found cout the proper output
     std::ifstream search_file(argv[3]);
     while (std::getline(search_file, name)) {
         int count = tree.search(name);
