@@ -22,7 +22,21 @@ void BTree::insertR(BTNode* node, const std::string& key) {
     insertR(node->children[i], key);
     // Handle the case when the child node is full
     if (node->children[i]->keys.size() > MAX_KEYS) {
-      
+      BTNode* child = node->children[i];
+      BTNode* newChild = new BTNode(Degree, child->isLeaf);
+
+      node->keys.insert(node->keys.begin() + i, child->keys[Degree - 1]);
+      newChild->keys.assign(child->keys.begin() + Degree, child->keys.end());
+      child->keys.erase(child->keys.begin() + Degree - 1, child->keys.end());
+
+      if (!child->isLeaf) {
+        newChild->children.assign(child->children.begin() + Degree, child->children.end());
+        child->children.erase(child->children.begin() + Degree, child->children.end());
+      }
+
+      node->num++;
+      child->num = Degree - 1;
+      node->children.insert(node->children.begin() + i + 1, newChild);
     }
   }
 }
