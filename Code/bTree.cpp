@@ -157,7 +157,7 @@ void BTree::generate_dot() {
     out.close();
 }
 
-void BTree::generate_dot_aux(BTNode* node, std::ofstream& out) {
+void BTree::generate_dot_aux(BTNode* node, std::ofstream& out){
     if (node != nullptr) {
         out << " \"" << node << "\" [label=\"";
         for (int i = 0; i < node->num; ++i) {
