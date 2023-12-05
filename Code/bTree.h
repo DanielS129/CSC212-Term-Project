@@ -28,6 +28,8 @@ class BTree {
         void insertR(BTNode* node, const std::string& key);
         int searchR(BTNode* node, const std::string& key, int& count);
         void traverseR(BTNode* node);
+
+        void generate_dot_aux(BTNode* node, std::ofstream& out);
     public:
         BTree(int degree);
         ~BTree();
@@ -38,7 +40,7 @@ class BTree {
         void traverse();
 
         void generate_dot();
-        void generate_dot_aux(BTNode* node, std::ofstream& out);
+        
 };
 
 #endif
