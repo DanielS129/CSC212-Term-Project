@@ -4,6 +4,48 @@
 
 // Private Functions
 
+void BTree::splitNode(BTNode* parent, int index, BTNode* child){
+  // Create a new node which is going to store (DEGREE - 1) keys of 'child'
+    BTNode* newNode = new BTNode(child->DEGREE, child->isLeaf);
+    newNode->num = Degree - 1;
+
+    // Copy the last (DEGREE - 1) keys of 'child' to 'newNode'
+    for (int j = 0; j < Degree - 1; j++) {
+        newNode->keys[j] = child->keys[j + Degree];
+    }
+
+    // Copy the last DEGREE children of 'child' to 'newNode'
+    if (!child->isLeaf) {
+        for (int j = 0; j < Degree; j++) {
+            newNode->children[j] = child->children[j + Degree];
+        }
+    }
+
+    // Reduce the number of keys in 'child'
+    child->num = Degree - 1;
+
+    // Since this node is going to have a new child,
+    // create space for the new child
+    for (int j = parent->num; j >= index + 1; j--) {
+        parent->children[j + 1] = parent->children[j];
+    }
+
+    // Link the new child to this node
+    parent->children[index + 1] = newNode;
+
+    // A key of 'child' will move to this node. Find the location of
+    // the new key and move all greater keys one space ahead
+    for (int j = parent->num - 1; j >= index; j--) {
+        parent->keys[j + 1] = parent->keys[j];
+    }
+
+    // Copy the middle key of 'child' to this node
+    parent->keys[index] = child->keys[Degree - 1];
+
+    // Increment the number of keys in this node
+    parent->num++;
+}
+
 //Function for insertion recursively + Finsih Split Node Function
 void BTree::insertR(BTNode* node, const std::string& key) {
   // If the node is a leaf, insert the key directly into the node
@@ -22,27 +64,14 @@ void BTree::insertR(BTNode* node, const std::string& key) {
     }
     // Check if the found child is full
     if (node->children[i + 1]->num == 2 * this->Degree - 1) {
-      // If the child is full, then split it
-      BTNode* child = node->children[i + 1];
-      BTNode* newChild = new BTNode(Degree, child->isLeaf);
+      // Split the full child node
+        splitNode(node, i, node->children[i]);
 
-      node->keys.insert(node->keys.begin() + i + 1, child->keys[Degree - 1]);
-      newChild->keys.assign(child->keys.begin() + Degree, child->keys.end());
-      child->keys.erase(child->keys.begin() + Degree - 1, child->keys.end());
-
-      if (!child->isLeaf) {
-        newChild->children.assign(child->children.begin() + Degree, child->children.end());
-        child->children.erase(child->children.begin() + Degree, child->children.end());
-      }
-
-      node->num++;
-      child->num = Degree - 1;
-      node->children.insert(node->children.begin() + i + 2, newChild);
-
-      // After splitting, decide where to insert the new key
-      if (node->keys[i + 1] < key) {
-        i++;
-      }
+        // After splitting, the middle key of node->children[i] goes up and
+        // node is split into two. Decide which of the two is going to have the new key
+        if (key > node->keys[i]) {
+            i++;
+        }
     }
     insertR(node->children[i + 1], key); // Recursively insert the key in the appropriate child
   }

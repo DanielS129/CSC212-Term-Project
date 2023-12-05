@@ -23,6 +23,8 @@ class BTree {
         BTNode* root;
         int Degree;
 
+        void splitNode(BTNode* parent, int index, BTNode* child);
+        
         //void removeR(BTNode* node, const std::string& key);
         void insertR(BTNode* node, const std::string& key);
         int searchR(BTNode* node, const std::string& key, int& count);
