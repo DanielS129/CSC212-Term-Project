@@ -97,17 +97,22 @@ int BTree::searchR(BTNode* node, const std::string& key, int& count) {
   }
 }
 
-void BTree::printR(BTNode* node) {
-  if (node) {
-    for (int i = 0; i < node->keys.size(); ++i) {
-      if (!node->isLeaf) {
-        printR(node->children[i]);
-      }
-      std::cout << node->keys[i] << " ";
-    }
+void BTree::traverseR(BTNode* node){
+  // There are num keys and num+1 children, traverse through num keys
+  // and first num children
+  int i;
+  for (i = 0; i < node->num; i++) {
+    // If this is not a leaf, then before printing key[i],
+    // traverse the subtree rooted with child[i].
     if (!node->isLeaf) {
-      printR(node->children.back());
+      traverseR(node->children[i]);
     }
+    std::cout << " " << node->keys[i];
+  }
+
+  // Print the subtree rooted with last child
+  if (!node->isLeaf) {
+    traverseR(node->children[i]);
   }
 }
 
@@ -137,34 +142,13 @@ int BTree::search(const std::string& key) {
   return count;
 }
 
-void BTree::print() {
-  if (!root) {
-    return;
-  }
-  std::cout << "" << std::endl;
-  printR(root);
-  std::cout << std::endl;
+void BTree::traverse() {
+    if (root != nullptr) {
+        traverseR(root);
+    }
 }
 
 /*
-// Creating basic preorder/inorder/postorder functions for implementation
-void BTree::preorder(std::ostream& os){
-    preorder(root, os);
-    std::cout << std::endl;
-}
-
-void BTree::inorder(std::ostream& os){
-    inorder(root, os);
-    std::cout << std::endl;
-}
-
-void BTree::postorder(std::ostream& os){
-    postorder(root, os);
-    std::cout << std::endl;
-}
-
-
-
   Functions That will not be used in this Program
   
   Note: In a real world situation this code is needed and is part of this Class
