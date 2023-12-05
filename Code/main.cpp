@@ -4,8 +4,6 @@
 #include <string>
 #include "bTree.h"
 
-void print_tree(BTree* tree, int mode);
-
 // Providing a general layout of main.cpp
 
 int main(int argc, char*argv[]){
@@ -24,7 +22,6 @@ int main(int argc, char*argv[]){
     // Insert data
     while(ss >> data){
         tree.insert(data);
-        print_tree(&tree, mode);
     }
 
     // Get the numbers to be removed
@@ -35,6 +32,5 @@ int main(int argc, char*argv[]){
     // Remove the numbers
     while(ss >> data){
         tree.remove(data);
-        print_tree(&tree, mode);
     }
 }
