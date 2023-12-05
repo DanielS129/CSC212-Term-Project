@@ -118,6 +118,24 @@ void BTree::print() {
 }
 
 /*
+// Creating basic preorder/inorder/postorder functions for implementation
+void BTree::preorder(std::ostream& os){
+    preorder(root, os);
+    std::cout << std::endl;
+}
+
+void BTree::inorder(std::ostream& os){
+    inorder(root, os);
+    std::cout << std::endl;
+}
+
+void BTree::postorder(std::ostream& os){
+    postorder(root, os);
+    std::cout << std::endl;
+}
+
+
+
   Functions That will not be used in this Program
   
   Note: In a real world situation this code is needed and is part of this Class
