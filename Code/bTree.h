@@ -36,6 +36,9 @@ class BTree {
         void insert(const std::string& key);
         int search(const std::string& key);
         void traverse();
+
+        void generate_dot();
+        void generate_dot_aux(BTNode* node, std::ofstream& out);
 };
 
 #endif

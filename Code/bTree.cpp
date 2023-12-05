@@ -143,8 +143,33 @@ int BTree::search(const std::string& key) {
 }
 
 void BTree::traverse() {
-    if (root != nullptr) {
-        traverseR(root);
+  if (root != nullptr) {
+    traverseR(root);
+  }
+}
+
+void BTree::generate_dot() {
+  std::ofstream out("btree.dot");
+    out << "digraph BTree {" << std::endl;
+    out << "node [shape=record];" << std::endl;
+    generate_dot_aux(root, out);
+    out << "}" << std::endl;
+    out.close();
+}
+
+void BTree::generate_dot_aux(BTNode* node, std::ofstream& out) {
+    if (node != nullptr) {
+        out << " \"" << node << "\" [label=\"";
+        for (int i = 0; i < node->num; ++i) {
+            out << "<f" << i << "> |" << node->keys[i] << "|";
+        }
+        out << "<f" << node->num << ">\"];" << std::endl;
+        if (!node->isLeaf) {
+            for (int i = 0; i <= node->num; ++i) { // Assuming children are indexed from 0 to num
+                out << " \"" << node << "\":f" << i << " -> \"" << node->children[i] << "\";" << std::endl;
+                generate_dot_aux(node->children[i], out);
+            }
+        }
     }
 }
 
