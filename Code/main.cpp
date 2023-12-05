@@ -15,9 +15,7 @@ int main(int argc, char*argv[]){
     std::ifstream data_file(argv[2]);
     std::string name;
     while (std::getline(data_file, name)) {
-        std :: cout << name << "1\n";
         tree.insert(name);
-        std :: cout << name << "2\n";
     }
     data_file.close();
 
