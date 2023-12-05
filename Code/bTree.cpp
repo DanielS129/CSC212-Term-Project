@@ -24,19 +24,23 @@ void BTree::insertR(BTNode* node, const std::string& key) {
   }
 }
 
-bool BTree::searchR(BTNode* node, const std::string& key) {
+int BTree::searchR(BTNode* node, const std::string& key, int& count) {
   int i = 0;
-  while (i < node->keys.size() && key > node->keys[i]) {
+  while (i < node->num && key > node->keys[i]) {
     i++;
   }
-  if (i < node->keys.size() && key == node->keys[i]) {
-    return true; // True if found, false otherwise
-  }
-  else if (node->isLeaf) {
-    return false;
-  }
-  else {
-    return searchR(node->children[i], key); // Recursively search 
+  if (i < node->num && key == node->keys[i]) {
+    count++; // Increment the count if the key is found
+    // Continue searching in the right subtree in case of duplicates
+    if (!node->isLeaf) {
+      searchR(node->children[i + 1], key, count);
+    }
+    return count; // Return the count of the key
+  } else if (node->isLeaf) {
+    return count; // Return the count (which will be 0 if the key is not found)
+  } else {
+    // Recursively search the appropriate child node
+    return searchR(node->children[i], key, count);
   }
 }
 
@@ -72,11 +76,12 @@ void BTree::insert(const std::string& key) {
   insertR(root,key);
 }
 
-bool BTree::search(const std::string& key) {
-  if (!root) {
-    return false;
+int BTree::search(const std::string& key) {
+  int count = 0;
+  if (root) {
+    count = searchR(root, key, count);
   }
-  return searchR(root, key);
+  return count;
 }
 
 void BTree::print() {
