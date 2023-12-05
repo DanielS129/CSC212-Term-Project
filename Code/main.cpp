@@ -7,30 +7,31 @@
 // Providing a general layout of main.cpp
 
 int main(int argc, char*argv[]){
-    std::ifstream ifs(argv[1]);
-    int mode = std::stoi(argv[2]);
+    int degree = std :: stoi(argv[1]);
 
-    BTree tree;
+    BTree tree(degree);
 
-    std::string line;
-
-    // Get the data to be inserted
-    std::getline(ifs, line);
-    std::stringstream ss(line);
-
-    std::string data;
-    // Insert data
-    while(ss >> data){
-        tree.insert(data);
+    //Will insert the Data into the Tree
+    std::ifstream data_file(argv[2]);
+    std::string name;
+    while (std::getline(data_file, name)) {
+        tree.insert(name);
     }
+    data_file.close();
 
-    // Get the numbers to be removed
-    std::getline(ifs, line);
-    ss.clear();
-    ss.str(line);
-
-    // Remove the numbers
-    while(ss >> data){
-        tree.remove(data);
+    //Will Search through the Tree to see if tree is found
+    std::ifstream search_file(argv[3]);
+    while (std::getline(search_file, name)) {
+        int count = tree.search(name);
+        std::cout << "The key \"" << name << "\" was found " << count << " times in the B-Tree." << std::endl;
     }
+    search_file.close();
+
+    //Will print out the Tree
+    tree.traverse();
+
+    //Will Generate a DOT File
+    tree.generate_dot();
+
+    return 0;
 }
