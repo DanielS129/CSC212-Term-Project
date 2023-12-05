@@ -116,6 +116,22 @@ void BTree::traverseR(BTNode* node){
   }
 }
 
+void BTree::generate_dot_aux(BTNode* node, std::ofstream& out){
+    if (node != nullptr) {
+        out << " \"" << node << "\" [label=\"";
+        for (int i = 0; i < node->num; ++i) {
+            out << "<f" << i << "> |" << node->keys[i] << "|";
+        }
+        out << "<f" << node->num << ">\"];" << std::endl;
+        if (!node->isLeaf) {
+            for (int i = 0; i <= node->num; ++i) { // Assuming children are indexed from 0 to num
+                out << " \"" << node << "\":f" << i << " -> \"" << node->children[i] << "\";" << std::endl;
+                generate_dot_aux(node->children[i], out);
+            }
+        }
+    }
+}
+
 // Public Functions
 
 BTree::BTree(int degree) {
@@ -157,21 +173,6 @@ void BTree::generate_dot() {
     out.close();
 }
 
-void BTree::generate_dot_aux(BTNode* node, std::ofstream& out){
-    if (node != nullptr) {
-        out << " \"" << node << "\" [label=\"";
-        for (int i = 0; i < node->num; ++i) {
-            out << "<f" << i << "> |" << node->keys[i] << "|";
-        }
-        out << "<f" << node->num << ">\"];" << std::endl;
-        if (!node->isLeaf) {
-            for (int i = 0; i <= node->num; ++i) { // Assuming children are indexed from 0 to num
-                out << " \"" << node << "\":f" << i << " -> \"" << node->children[i] << "\";" << std::endl;
-                generate_dot_aux(node->children[i], out);
-            }
-        }
-    }
-}
 
 /*
   Functions That will not be used in this Program
